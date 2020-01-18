@@ -4,10 +4,34 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      src="https://www.gstatic.com/mobilesdk/190424_mobilesdk/nav_nachos@2x.png"
+      color="#051e34"
+      overlay-color="white"
       fixed
       app
     >
-      <v-list>
+      <div class="nav-draw-title">
+        <i class="vortex-icon"></i>
+        <span class="vortex-title"
+          >Vortex<span style="color: #ffcb2b;">Admin</span></span
+        >
+      </div>
+      <v-expansion-panels accordion tile multiple dark>
+        <v-expansion-panel
+          v-for="(item, i) in 5"
+          :key="i"
+          style="background: transparent; color: white;"
+        >
+          <v-expansion-panel-header>Item</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+      <v-list class="pa-0" dark>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -24,21 +48,18 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app color="cyan darken-3">
-      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn @click.stop="miniVariant = !miniVariant" icon>
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn @click.stop="clipped = !clipped" icon>
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn @click.stop="fixed = !fixed" icon>
-        <v-icon>mdi-minus</v-icon>
-      </v-btn> -->
-      <v-toolbar-title v-text="title" />
+    <v-app-bar
+      :clipped-left="clipped"
+      elevate-on-scroll
+      fixed
+      app
+      color="#eceff1"
+      height="48px"
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
     </v-app-bar>
-    <v-content>
+    <v-content class="content">
       <v-container>
         <nuxt />
       </v-container>
@@ -53,7 +74,7 @@
 export default {
   data() {
     return {
-      clipped: true,
+      clipped: false,
       drawer: true,
       fixed: false,
       items: [
@@ -76,3 +97,37 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.nav-draw-title {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  color: white;
+
+  &:hover .vortex-icon {
+    transform: rotate(360deg);
+  }
+
+  .vortex-icon {
+    margin-left: 20px;
+    height: 28px;
+    width: 28px;
+    transition: 1s;
+    color: #ffcb2b;
+  }
+
+  .vortex-title {
+    margin-left: 12px;
+    font-size: 20px;
+    font-family: 'Product Sans Regular', sans-serif;
+  }
+}
+
+.content {
+  background-color: #eceff1;
+}
+</style>
