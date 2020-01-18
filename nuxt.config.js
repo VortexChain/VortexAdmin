@@ -84,5 +84,9 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  server: {
+    port: 3100, // default: 3000
+    host: '192.168.0.106' // default: localhost
   }
 }

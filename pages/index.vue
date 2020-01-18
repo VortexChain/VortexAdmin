@@ -1,17 +1,24 @@
 <template>
   <div>
-    <div class="headline my-3">Welcome VortexChain admin cabinet!</div>
+    <div class="headline">Admin cabinet for VortexChain services</div>
     <v-row>
-      <v-col v-for="n in 6" :key="n" cols="3">
+      <v-col
+        v-for="(page, index) in pages"
+        :key="index"
+        cols="12"
+        sm="6"
+        md="4"
+        lg="3"
+      >
         <v-card v-ripple class="item-card">
           <nuxt-link
+            :to="page.route"
             tag="div"
-            to="/inspire"
             class="pa-5 d-flex flex-column align-start"
           >
-            <div class="subtitle-1">Active servers</div>
+            <div class="subtitle-1">{{ page.name }}</div>
             <div class="caption">Lorem, ipsum dolor</div>
-            <v-icon class="mt-auto">mdi-server-security </v-icon>
+            <v-icon class="mt-auto">{{ page.icon }}</v-icon>
           </nuxt-link>
         </v-card>
       </v-col>
@@ -55,7 +62,14 @@ export default {
   components: {},
   data() {
     return {
-      dialog: false
+      dialog: false,
+      pages: [
+        {
+          name: 'Active servers',
+          icon: 'mdi-server-security',
+          route: '/servers'
+        }
+      ]
     }
   }
 }
