@@ -16,37 +16,36 @@
           >Vortex<span style="color: #ffcb2b;">Admin</span></span
         >
       </div>
-      <v-expansion-panels accordion tile multiple dark>
+      <v-expansion-panels accordion tile multiple dark flat>
         <v-expansion-panel
-          v-for="(item, i) in 5"
+          v-for="(el, i) in items"
           :key="i"
-          style="background: transparent; color: white;"
+          :class="miniVariant ? 'mini' : ''"
+          class="list-item"
         >
-          <v-expansion-panel-header>Item</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+          <v-expansion-panel-header v-if="!miniVariant">{{
+            el.group
+          }}</v-expansion-panel-header>
+          <v-expansion-panel-content class="list-item-content">
+            <v-list class="pa-0" dark>
+              <v-list-item
+                v-for="(item, index) in el.items"
+                :key="index"
+                :to="item.to"
+                router
+                exact
+              >
+                <v-list-item-action>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
-      <v-list class="pa-0" dark>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="clipped"
@@ -79,14 +78,44 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
+          group: 'Vortex',
+          items: [
+            {
+              icon: 'mdi-thermostat',
+              title: 'Status',
+              to: '/'
+            },
+            {
+              icon: 'mdi-database',
+              title: 'Databases',
+              to: '/inspire'
+            }
+          ]
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          group: 'Develop',
+          items: [
+            {
+              icon: 'mdi-apps',
+              title: 'Welcome',
+              to: '/'
+            },
+            {
+              icon: 'mdi-chart-bubble',
+              title: 'Inspire',
+              to: '/inspire'
+            }
+          ]
+        },
+        {
+          group: 'Service',
+          items: [
+            {
+              icon: 'mdi-apps',
+              title: 'Dedicated servers',
+              to: '/servers'
+            }
+          ]
         }
       ],
       miniVariant: false,
@@ -127,7 +156,24 @@ export default {
   }
 }
 
+.list-item {
+  background: transparent !important;
+  color: white !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  &.mini {
+    border-bottom: 0px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
 .content {
   background-color: #eceff1;
+}
+</style>
+
+<style>
+.list-item-content > div {
+  padding-left: 0;
+  padding-right: 0;
 }
 </style>

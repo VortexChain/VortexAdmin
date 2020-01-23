@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="headline">Admin cabinet for VortexChain services</div>
+    <div class="display-1	mb-5">Welcome to VortexAdmin</div>
     <v-row>
       <v-col
         v-for="(page, index) in pages"
